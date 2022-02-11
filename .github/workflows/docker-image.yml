@@ -12,10 +12,11 @@ jobs:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     env:
-      TAG_NAME: $(date +%Y%m%d%H%M%S)
+      TAG_VER: $(git log -1 --pretty=%h)
       REPO_NAME: whaledemo-docker
       DOCKER_USER: ${{secrets.DOCKER_USER}}
       DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+      BUILD_TIMESTAMP: $( date '+%F_%H:%M:%S' )
 
     steps:
     - uses: actions/checkout@v2
@@ -24,7 +25,7 @@ jobs:
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
         
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag $DOCKER_USER/$REPO_NAME:${{env.TAG_NAME}}
+      run: docker build . --file Dockerfile --tag $DOCKER_USER/$REPO_NAME:${{env.TAG_VER}} --build-arg BUILD_TIMESTAMP=${{env.BUILD_TIMESTAMP}}
       
     - name: Docker Push
-      run: docker push $DOCKER_USER/$REPO_NAME:${{env.TAG_NAME}}
+      run: docker push $DOCKER_USER/$REPO_NAME:${{env.TAG_VER}}
