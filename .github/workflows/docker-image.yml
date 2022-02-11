@@ -28,4 +28,6 @@ jobs:
       run: docker build . --file Dockerfile --tag $DOCKER_USER/$REPO_NAME:${{env.TAG_VER}} --tag latest --build-arg BUILD_TIMESTAMP=${{env.BUILD_TIMESTAMP}}
       
     - name: Docker Push
-      run: docker push $DOCKER_USER/$REPO_NAME:${{env.TAG_VER}}
+      run: |
+           docker push $DOCKER_USER/$REPO_NAME:${{env.TAG_VER}} 
+           docker push $DOCKER_USER/$REPO_NAME:latest
