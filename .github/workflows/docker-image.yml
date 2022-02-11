@@ -16,7 +16,7 @@ jobs:
       REPO_NAME: whaledemo-docker
       DOCKER_USER: ${{secrets.DOCKER_USER}}
       DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-      BUILD_TIMESTAMP: $( date '+%F_%H:%M:%S' )
+      BUILD_TIMESTAMP: $(date '+%F_%H:%M:%S')
 
     steps:
     - uses: actions/checkout@v2
