@@ -1,14 +1,14 @@
 #!/bin/bash
 
 # set variables
-hostname='localhost'
+hostname='172.17.0.1'
 port=$1
 
 # wait for the app to start
 sleep 5 
 
 # ping the app
-status_code=$(curl --write-out %{http_code} --out /dev/null --silent ${hostname}:${port})
+status_code=$(curl --write-out %{http_code} --output /dev/null --silent ${hostname}:${port})
 
 if [ $status_code -eq 200 ];
 then
