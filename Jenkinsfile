@@ -18,8 +18,9 @@ pipeline {
 		}
 
         stage("Push") {
-            steps { dockerLogin() }
-            steps { pushApp() }
+            steps { 
+               dockerLogin()
+               pushApp() }
 		}
 
         stage("Deploy - Dev") {
