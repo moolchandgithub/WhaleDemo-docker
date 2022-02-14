@@ -75,7 +75,7 @@ def deploy(environment) {
 
 	if ("${environment}" == 'dev') {
 		containerName = "devapp"
-		port = "38888"
+		port = "30888"
 	} 
 	else if ("${environment}" == 'stage') {
 		containerName = "stageapp"
@@ -91,7 +91,7 @@ def deploy(environment) {
 	}
 
 	sh "kubectl create deployment ${containerName} --image=$DOCKERHUB_CREDENTIALS_USR/$REPO_NAME:${BUILD_NUMBER} --replicas=4 --port=80"
-	sh "kubectl expose deployment ${containerName} --type=NodePort --port 80 --overrides '{ "apiVersion": "v1","spec":{"ports": [{"port":80,"protocol":"TCP","targetPort":80,"nodePort":$port}]}}"
+	sh "kubectl apply -f ${containerName}_service.yaml"
 
 }
 
