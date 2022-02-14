@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: whaledemo
+  name: whaledemo
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    nodePort: 30080
+    targetPort: 80
+  selector:
+    app: whaledemo
+  type: NodePort
+status:
+  loadBalancer: {}

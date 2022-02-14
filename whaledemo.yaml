@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: whaledemo
+  name: whaledemo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: whaledemo
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: whaledemo
+    spec:
+      containers:
+      - image: docker.io/mooldocker/whaledemo-docker
+        name: whaledemo-docker
+        ports:
+        - containerPort: 80
+        resources: {}
+status: {}
