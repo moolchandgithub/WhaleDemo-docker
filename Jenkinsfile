@@ -66,6 +66,8 @@ def dockerLogin() {
 
 def pushApp() {
         sh "docker push $DOCKERHUB_CREDENTIALS_USR/$REPO_NAME --all-tags"
+        sh "docker image rm $DOCKERHUB_CREDENTIALS_USR/$REPO_NAME:${BUILD_NUMBER} $DOCKERHUB_CREDENTIALS_USR/$REPO_NAME:latest"
+        sh "docker logout"
 }
 
 def deploy(environment) {
